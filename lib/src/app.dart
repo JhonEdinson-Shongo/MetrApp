@@ -8,10 +8,11 @@ class MyApp extends StatelessWidget {
   Widget build(context){
 
     var materialApp = MaterialApp(
-          home: Center(
-            child: HomePage(),
-            ),
-        );
-        return materialApp;
+      debugShowCheckedModeBanner: false,
+      home: Center(
+      child: HomePage(),
+      ),
+    );
+    return materialApp;
   }
 }
