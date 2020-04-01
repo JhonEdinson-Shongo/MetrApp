@@ -10,7 +10,8 @@ class MenuOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Menu"),        
+        title: Text("Rutas"), 
+        backgroundColor: Color.fromRGBO(39, 99, 52, 1),      
       ),
       body: StreamBuilder(
         stream: Firestore.instance.collection('rutas').snapshots(),
@@ -18,18 +19,32 @@ class MenuOptions extends StatelessWidget {
           if(!snapshot.hasData){
             return Center(child: CircularProgressIndicator(),);
           }
-          List<DocumentSnapshot> docs = snapshot.data.documents;
-          return ListView.builder(
-            itemCount: docs.length,
-            itemBuilder: (context, index){
-              Map<String, dynamic> data = docs[index].data;
-              return ListTile(
-                title: Text(data['categoria']),
-              );
-            }
-            );
+          return _listarRutas(snapshot);
         },
       ),
     );
   }
+
+  //metodo para cargar las rutas
+  ListView _listarRutas(AsyncSnapshot<QuerySnapshot> snapshot){
+    List<DocumentSnapshot> docs = snapshot.data.documents;
+    return ListView.builder(
+            itemCount: docs.length,
+            itemBuilder: (context, index){
+              Map<String, dynamic> data = docs[index].data;
+              return Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text(data['categoria']),
+                    leading:  Icon(Icons.keyboard_arrow_right),
+                    onTap: (){},
+                  ),
+                  Divider(thickness: 1.0,),
+                ],
+              );
+              
+            }
+            );
+  }
+
 }
