@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/pages/home_menuPage.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget{
+
+  
+
   @override
   createState() => _HomePage();
   }
@@ -10,11 +13,8 @@ class HomePage extends StatefulWidget{
   class _HomePage extends State<HomePage>{
   
   //Creamos una variable de tipo TextStyle para los textos del Home
-  final TextStyle styleHomeTitulo = new TextStyle(fontSize: 40, height: 2);
-  final TextStyle styleHomeSubTitulo = new TextStyle(fontSize: 25);
-
+  final TextStyle styleHomeTitulo = new TextStyle(fontSize: 25, height: 2);
   
-
   @override
   Widget build(BuildContext context) {
         return Scaffold(
@@ -24,14 +24,23 @@ class HomePage extends StatefulWidget{
             centerTitle: true,
           ),
           body:Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children:<Widget>[
-                Text("Bienvenido a MetrApp", style: styleHomeTitulo),
-                Divider(),
-                Text("tu aplicacion para rutas de Metrolinea", style: styleHomeSubTitulo,),
-              ],
-        ),
+            child: Container(              
+              child:Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[   
+                    Text("Bienvenido a MetrApp", style: styleHomeTitulo),
+                    Text("tu aplicacion para rutas de Metrolinea"),
+                    SizedBox(height: 15.0,),
+                    Text("NOTICIAS METROLINEA"),                         
+                    Text("En este apartado encontraras las noticias mas importantes para que estes al día", textAlign: TextAlign.center,),
+                    SizedBox(height: 10.0,),
+                    Divider(),
+                  ],
+                ),
+              ),
+            ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       floatingActionButton: FloatingActionButton(
@@ -43,10 +52,10 @@ class HomePage extends StatefulWidget{
               return MenuOptions();
             }
           );
-          Navigator.push(context, route);
+          Navigator.push(context, route);          
         },
       ),
 
-    );
-  }
+    );     
+  }  
 }

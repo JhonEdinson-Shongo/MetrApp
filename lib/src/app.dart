@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+//import 'package:flutterapp/src/Widgets/widgets.dart';
 
+import 'package:flutterapp/src/CodigoVIP/pageVIP.dart';
 import 'package:flutterapp/src/pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
   
   @override
   Widget build(context){
-
-    var materialApp = MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Center(
-      child: HomePage(),
-      ),
+      title: 'paso esto',
+      initialRoute: 'home',
+      routes: {
+        'home' : (BuildContext context) => HomePage(),
+        'codigoVIP' : (BuildContext context) => CodigoVIP(),
+      },      
     );
-    return materialApp;
   }
 }
