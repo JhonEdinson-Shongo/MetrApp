@@ -37,7 +37,7 @@ class MenuOptions extends StatelessWidget {
             ListTile(
               title: Text(data['tipomenu']),
               leading:  Icon(Icons.keyboard_arrow_right),
-              onTap: () => Navigator.pushNamed(context, 'codigoVIP'),
+              onTap: () => Navigator.pushNamed(context, data['path']),
             ),
             Divider(thickness: 1.0,),
           ],

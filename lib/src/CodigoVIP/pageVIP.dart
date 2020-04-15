@@ -22,7 +22,7 @@ class CodigoVIP extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
 
-    final fondoModaro = Container(
+    final fondo = Container(
       height: size.height * 0.4,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class CodigoVIP extends StatelessWidget {
 
     return Stack(
       children: <Widget>[
-        fondoModaro,
+        fondo,
         Positioned( top: 90.0, left: 30.0, child: circulo ),
         Positioned( top: -40.0, right: -30.0, child: circulo ),
         Positioned( bottom: -50.0, right: -10.0, child: circulo ),
