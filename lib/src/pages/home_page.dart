@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/src/pages/home_map.dart';
-import 'package:flutterapp/src/pages/home_menuPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:MetrApp/src/pages/home_menuPage.dart';
+
 
 class HomePage extends StatefulWidget{
 
@@ -15,48 +14,42 @@ class HomePage extends StatefulWidget{
   
   //Creamos una variable de tipo TextStyle para los textos del Home
   final TextStyle styleHomeTitulo = new TextStyle(fontSize: 25, height: 2);
+  final TextStyle styleHomeParrafo = new TextStyle(fontSize: 15, height: 2);
   
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("MetrApp"),
-            backgroundColor: Color.fromRGBO(39, 99, 52, 1),
-            centerTitle: true,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("MetrApp"),
+        backgroundColor: Color.fromRGBO(39, 99, 52, 1),
+        centerTitle: true,
+      ),
+    
+      body: SingleChildScrollView(
+        child: Container(              
+          child:Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,                  
+              children: <Widget>[
+                Text("Bienvenido a MetrApp", style: styleHomeTitulo),
+                Text("tu aplicacion para rutas de Metrolinea", textAlign: TextAlign.center, style: styleHomeParrafo,),
+                Text("MetrApp nos mueve", textAlign: TextAlign.center, style: styleHomeParrafo,),
+                SizedBox(height: 15.0,),
+                Divider(),
+                Image(
+                  image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/Logometrapp.png?alt=media&token=b216ce73-c877-459f-aaad-0cc016e67984')
+                ),
+                Divider(),
+                Text("MISION", style: styleHomeTitulo),
+                Text("La Mision de MetrApp es informar a los usuarios de Metrolinea de Bucaramanga y su area metropolitana, sobre las rutas de este medio de transporte masivo e informar sobre las noticias o eventos relacionados con esta entidad.", textAlign: TextAlign.justify, style: styleHomeParrafo,),
+                Divider(),
+                Text("VISION", style: styleHomeTitulo),
+                Text("Llegar a informar a los usuarios del área metropolitana en el año 2020, y ser una aplicación con impacto y reconocida, donde todos los usuarios la utilicen al máximo, ofreciendo calidad al servicio masivo de transporte.", textAlign: TextAlign.justify, style: styleHomeParrafo,),
+              ],
+            ),                
           ),
-          body:Center(
-            child: Container(              
-              child:Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,                  
-                  children: <Widget>[
-                    Text("Bienvenido a MetrApp", style: styleHomeTitulo),
-                    Text("tu aplicacion para rutas de Metrolinea"),
-                    SizedBox(height: 15.0,),
-                    Text("NOTICIAS METROLINEA"),                         
-                    Text("En este apartado encontraras las noticias mas importantes para que estes al día", textAlign: TextAlign.center,),
-                    SizedBox(height: 10.0,),
-                    Divider(),      
-                    //desde aqui es prueba
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      child: Column(
-                        children: <Widget>[
-                          Text("data"),
-                          Divider(),
-                          _noticias(),
-                          Divider(),
-                          Text("data")
-                        ],
-                      )
-                    //hasta aqui y sus metodos
-                    ),
-
-                  ],
-                ),                
-              ),
-            ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       floatingActionButton: FloatingActionButton(
@@ -74,47 +67,4 @@ class HomePage extends StatefulWidget{
 
     );     
   }  
-
-  Widget _noticias(){
-
-    return StreamBuilder(
-      builder: (BuildContext context, AsyncSnapshot snapshot){
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: <Widget>[
-              StreamBuilder(
-                stream: Firestore.instance.collection('noticias').snapshots(),
-                builder: (context,AsyncSnapshot<QuerySnapshot> snapshot){
-                  if(!snapshot.hasData){
-                    return Center(child: CircularProgressIndicator(),);
-                  }
-                  return _cargarNoticias(snapshot);
-                },
-                ),
-            ],
-          ),
-          
-        );
-      }
-    );
-  }
-
-  ListView _cargarNoticias(AsyncSnapshot<QuerySnapshot> snapshot){
-    List<DocumentSnapshot> docs = snapshot.data.documents;
-    return ListView.builder(
-      itemCount: docs.length,
-      itemBuilder: (context, index){
-        Map<String, dynamic> data = docs[index].data;
-        return Column(
-          children: <Widget>[
-            Text(data['titulo']),
-            Text(data['contenido']),
-            Divider(thickness: 1.0,),
-          ],
-        );
-      }
-    );
-  }
-  
 }

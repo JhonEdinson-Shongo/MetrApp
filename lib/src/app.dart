@@ -1,9 +1,11 @@
+import 'package:MetrApp/src/pages/home_pageNews.dart';
+import 'package:MetrApp/src/pages/panel_Admin.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutterapp/src/Widgets/widgets.dart';
 
-import 'package:flutterapp/src/CodigoVIP/pageVIP.dart';
-import 'package:flutterapp/src/pages/home_map.dart';
-import 'package:flutterapp/src/pages/home_page.dart';
+import 'package:MetrApp/src/pages/home_map.dart';
+import 'package:MetrApp/src/pages/home_page.dart';
+import 'package:MetrApp/src/CodigoVIP/pageVIP.dart';
 
 class MyApp extends StatelessWidget {
   
@@ -17,6 +19,8 @@ class MyApp extends StatelessWidget {
         'home' : (BuildContext context) => HomePage(),
         'codigoVIP' : (BuildContext context) => CodigoVIP(),
         'mapa' : (BuildContext context) => Mapa(),
+        'noticias' : (BuildContext context) => Noticias(),
+        'panelAdmin' : (BuildContext context) => Panel_Admin(),
       },      
     );
   }

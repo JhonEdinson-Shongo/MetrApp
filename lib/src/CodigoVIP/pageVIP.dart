@@ -84,7 +84,6 @@ class CodigoVIP extends StatelessWidget {
               height: size.height * 0.40,
             ),
           ),
-
           Container(
             width: size.width * 0.85,
             margin: EdgeInsets.symmetric(vertical: 30.0),
@@ -162,7 +161,7 @@ class CodigoVIP extends StatelessWidget {
           elevation: 0.0,
           color: Color.fromRGBO(9, 99, 52, 1),
           textColor: Colors.white,          
-          onPressed: (){},
+          onPressed: () => Navigator.pushNamed(context, 'home'),
           //onPressed: snapshot.hasData ? ()=> _login(bloc, context) : null
         );
       },
