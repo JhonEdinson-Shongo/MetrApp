@@ -1,12 +1,45 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:MetrApp/src/providers/noticias.dart';
 
-class Noticias extends StatelessWidget {
+class PageNoticias extends StatefulWidget {
 
-  
-  final TextStyle styleHomeTitulo = new TextStyle(fontSize: 25, height: 2);
-  final TextStyle styleHomeParrafo = new TextStyle(fontSize: 15, height: 1.3);
+    @override
+  _PageNoticiasState createState() => _PageNoticiasState();
+}
+
+class _PageNoticiasState extends State<PageNoticias>{
+  List<Noticias> noticiasList = [];
+
+  @override
+  void initState() { 
+    super.initState();
+    DatabaseReference noticiasRef = FirebaseDatabase.instance.reference().child("Noticias");
+    noticiasRef.once().then((DataSnapshot snap){
+      var keys = snap.value.keys;
+      var data = snap.value;
+      
+      noticiasList.clear();
+
+      for(var individualKey in keys){
+        Noticias noticias = Noticias(
+          data[individualKey]['image'],
+          data[individualKey]['titulo'],
+          data[individualKey]['contenido'],
+          data[individualKey]['date'],
+          data[individualKey]['time']
+        );
+        print(data[individualKey]['image']);
+
+        noticiasList.add(noticias);
+      }
+
+      setState((){
+        print("Length: $noticiasList.length");
+      });
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,45 +48,68 @@ class Noticias extends StatelessWidget {
         title: Text("Noticias MetrApp"), 
         backgroundColor: Color.fromRGBO(39, 99, 52, 1),      
       ),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection('noticias').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
-          if(!snapshot.hasData){
-            return Center(
-              child: Column(     
-                mainAxisAlignment: MainAxisAlignment.center,           
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  SizedBox(height: 15.0,),
-                  Text("Cargando..."),
-                ],
-              )
-            );
-          }
-          return _listarNoticias(snapshot);
-        },
+      body: Container(
+        child: noticiasList.length == 0
+        ? Text("No hay noticias disponibles")
+        : ListView.builder(
+          itemCount: noticiasList.length,
+          itemBuilder: (BuildContext context, int index) {
+          return noticiasUI(
+            noticiasList[index].image,
+            noticiasList[index].titulo,
+            noticiasList[index].contenido,
+            noticiasList[index].date,
+            noticiasList[index].time,
+          );
+         },
+        ),
       ),
     );
   }
 
-  //metodo para cargar las rutas
-  ListView _listarNoticias(AsyncSnapshot<QuerySnapshot> snapshot){
-    List<DocumentSnapshot> docs = snapshot.data.documents;
-    return ListView.builder(
-      itemCount: docs.length,      
-      itemBuilder: (context, index){
-        Map<String, dynamic> data = docs[index].data;
-        return Column(                
+  Widget noticiasUI(String img, String titulo, String contenido, String date, String time){
+    return Card(
+      elevation: 10.0,
+      margin: EdgeInsets.all(14.0),
+      child: Container(
+        padding: EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 15.0,),
-            Divider(),
-            Text(data['titulo'], style: styleHomeTitulo,),
-            Divider(),
-            Text(data['contenido'], style: styleHomeParrafo, textAlign: TextAlign.center,),
-            //Image(image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/12230931_862120450569599_230996021_n.jpg?alt=media&token=96ebdd03-5bff-4c98-8d35-ce9b64eccd00"))
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  date,
+                  style: Theme.of(context).textTheme.subtitle,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  time,
+                  style: Theme.of(context).textTheme.subtitle,
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+            SizedBox(height: 10.0,),
+            Image.network(
+              img,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 10.0,),
+            Text(
+              titulo,
+              style: Theme.of(context).textTheme.title,
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              contenido,
+              style: Theme.of(context).textTheme.subhead,
+              textAlign: TextAlign.center,
+            ),
           ],
-        );
-      }
+        ),
+      ),
     );
   }
 

@@ -142,7 +142,7 @@ class _Panel_AdminState extends State<Panel_Admin> {
     var formatTime = DateFormat('EEEE, hh:mm aaa');
 
     String date = formatDate.format(dbtimekey);
-    String time = formatDate.format(dbtimekey);
+    String time = formatTime.format(dbtimekey);
 
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {
@@ -153,7 +153,7 @@ class _Panel_AdminState extends State<Panel_Admin> {
       "time": time
     };
 
-    ref.child("post").push().set(data);
+    ref.child("Noticias").push().set(data);
   }
 
   bool validacion_Guardar(){
