@@ -38,10 +38,11 @@ class _Panel_AdminState extends State<Panel_Admin> {
         ? Padding(padding: const EdgeInsets.all(16.5),
         child: Column(
           children: <Widget>[
-            Text("Panel para la gestion de las noticias"),
-            Text("En este panel podra agregar una nueva noticias a la pagina de noticias"),
-            Text("Se requiere que agrege una imagen..."),
-            Text("NECESITO CUADRAR LOS TEXTOS Y SU CONTENIDO"),
+            Text("PANEL DE NOTICIAS", style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+            SizedBox(height: 16.0,),
+            Text("En este panel podra agregar una nueva noticias a la pagina de noticias, este consta de una imagen un titulo y un parrafo de la noticia.",style: Theme.of(context).textTheme.subhead, textAlign: TextAlign.center,),
+            SizedBox(height: 20.0,),
+            Text("Se requiere que agrege una imagen...", style: Theme.of(context).textTheme.headline, textAlign: TextAlign.center,),
           ],
         ),
         )
@@ -131,7 +132,7 @@ class _Panel_AdminState extends State<Panel_Admin> {
       //Guardar el Post a Firebase database: database realtime
       saveToDatabase(url);
       //Regresar al home
-      Navigator.pushNamed(context,"home");
+      await Navigator.pushNamed(context,"home");
     }
   }
 

@@ -102,10 +102,11 @@ class _PageNoticiasState extends State<PageNoticias>{
               style: Theme.of(context).textTheme.title,
               textAlign: TextAlign.center,
             ),
+            SizedBox(height: 10.0,),
             Text(
               contenido,
               style: Theme.of(context).textTheme.subhead,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.justify,
             ),
           ],
         ),

@@ -46,6 +46,38 @@ class HomePage extends StatefulWidget{
                 Divider(),
                 Text("VISION", style: styleHomeTitulo),
                 Text("Llegar a informar a los usuarios del área metropolitana en el año 2020, y ser una aplicación con impacto y reconocida, donde todos los usuarios la utilicen al máximo, ofreciendo calidad al servicio masivo de transporte.", textAlign: TextAlign.justify, style: styleHomeParrafo,),
+                Divider(),
+                SizedBox(height: 10.0,),
+                Text("Desarrolladores", textAlign: TextAlign.justify, style: styleHomeTitulo,),
+                Card(
+                  elevation: 10.0,
+                  margin: EdgeInsets.all(14.0),
+                  child: Container(
+                    padding: EdgeInsets.all(14.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10.0,),
+                        Image.network(
+                          "https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/foto.jpg?alt=media&token=79a1e1a9-6173-4b33-b8fd-c4bf6eafea58",                          
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: 10.0,),
+                        Text(
+                          "JHON EDINSON CASTAÑEDA OVIEDO",
+                          style: Theme.of(context).textTheme.title,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10.0,),
+                        Text(
+                          "Estudiante de ingenieria de sistemas de 9° semestre. desarrollador del aplicativo MetrApp",
+                          style: Theme.of(context).textTheme.subhead,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),                
           ),

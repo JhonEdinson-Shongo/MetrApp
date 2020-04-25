@@ -11,7 +11,8 @@ class MenuOptions extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Menu"), 
-        backgroundColor: Color.fromRGBO(39, 99, 52, 1),      
+        backgroundColor: Color.fromRGBO(39, 99, 52, 1),
+        centerTitle: true,
       ),
       body: StreamBuilder(
         stream: Firestore.instance.collection('menuAdmin').snapshots(),
