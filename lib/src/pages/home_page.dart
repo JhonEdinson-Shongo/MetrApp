@@ -59,7 +59,7 @@ class HomePage extends StatefulWidget{
                       children: <Widget>[
                         SizedBox(height: 10.0,),
                         Image.network(
-                          "https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/foto.jpg?alt=media&token=79a1e1a9-6173-4b33-b8fd-c4bf6eafea58",                          
+                          "https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/foto.jpg?alt=media&token=79a1e1a9-6173-4b33-b8fd-c4bf6eafea58",
                           fit: BoxFit.cover,
                         ),
                         SizedBox(height: 10.0,),
@@ -70,7 +70,37 @@ class HomePage extends StatefulWidget{
                         ),
                         SizedBox(height: 10.0,),
                         Text(
-                          "Estudiante de ingenieria de sistemas de 9° semestre. desarrollador del aplicativo MetrApp",
+                          "Estudiante de ingenieria de sistemas de 9° semestre. Desarrollador del aplicativo MetrApp",
+                          style: Theme.of(context).textTheme.subhead,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Divider(),
+                Card(
+                  elevation: 10.0,
+                  margin: EdgeInsets.all(14.0),
+                  child: Container(
+                    padding: EdgeInsets.all(14.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10.0,),
+                        Image.network(
+                          "https://firebasestorage.googleapis.com/v0/b/flutter-firebase-e4f31.appspot.com/o/35edaa5e-13b1-4b7e-99a9-f4b9f5fc310d.jpg?alt=media&token=08ebbd9c-f851-4854-b9a6-8a1d8465fd08",                          
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: 10.0,),
+                        Text(
+                          "JUAN CAMILO LUNA FLOREZ",
+                          style: Theme.of(context).textTheme.title,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10.0,),
+                        Text(
+                          "Estudiante de ingenieria de sistemas de 9° semestre. Desarrollador del aplicativo MetrApp",
                           style: Theme.of(context).textTheme.subhead,
                           textAlign: TextAlign.center,
                         ),
@@ -87,7 +117,7 @@ class HomePage extends StatefulWidget{
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.toc, size: 50,),
         backgroundColor: Color.fromRGBO(196, 213, 77, 1),   
-        onPressed: (){
+        onPressed:(){
           final route = MaterialPageRoute(
             builder: (context) {
               return MenuOptions();

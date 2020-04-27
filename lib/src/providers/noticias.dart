@@ -5,3 +5,4 @@ class Noticias {
 
   //Aqui para implementar bloc debi haber cargado la base.
 }
+

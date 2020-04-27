@@ -1,42 +1,39 @@
-import 'dart:ffi';
-
-import 'package:firebase_database/firebase_database.dart';
+import 'package:MetrApp/src/providers/MapaR.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
+import 'package:MetrApp/src/providers/MapaR.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Mapa extends StatefulWidget {
+  Mapa({this.data});
+  MapaR data;
+  
   @override
-  createState() => _Mapa();
+  State<StatefulWidget> createState() => _Mapa(doc: data);
 }
 
 class _Mapa extends State<Mapa> {
+  _Mapa({this.doc});
+  MapaR doc;
+
   Completer<GoogleMapController> _controller = Completer();
-  static const LatLng _center = const LatLng(7.059710, -73.090407);
+  static const LatLng _center = LatLng(7.059710, -73.090407);
   final Set<Marker> _markers = {};
   LatLng _lastMapPosition = _center;
   MapType _currentMapType = MapType.hybrid;
 
-  static final CameraPosition _position1 = CameraPosition(
-    bearing: 0.0,
-    target: LatLng(7.059710, -73.090407),
-    tilt: 59.440,
-    zoom: 11.0,
-  );
-
-  _onMapCreated(GoogleMapController controller) {
+  void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
 
-  _onCameraMove(CameraPosition position) {
+  void _onCameraMove(CameraPosition position,) {
     _lastMapPosition = position.target;
   }
 
-  _onMapTypeButtonPressed() {
-    setState(() {
 
+  void _onMapTypeButtonPressed() {
+    setState(() {
       _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
           : MapType.normal;
@@ -45,20 +42,35 @@ class _Mapa extends State<Mapa> {
 
 
   //metodo para poner los puntos de las rutas...
-  _onAddMarkerButtonPressed() {
+  void _onAddMarkerButtonPressed(String time,LatLng coord, String nombre){
+    print("Entrooooooooo");
     setState(() {
+      print("SetState... aqui se añade?");
       _markers.add(Marker(
         markerId: MarkerId(_lastMapPosition.toString()),
-        position: _lastMapPosition,
+        position: coord,
         infoWindow: InfoWindow(
-          title: 'This is a Title',
-          snippet: 'This is a snippet',
+          title: nombre,
+          snippet: "La ruta toma un tiempo de: $time"
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
   }
 
+  void _loadRoutes(){
+    for(var index in doc.rutas){
+      List coor = index.toString().split(", ");      
+      LatLng coord = LatLng(double.parse(coor[0]), double.parse(coor[1]));
+      _onAddMarkerButtonPressed(doc.tiempo, coord, doc.nombre);
+      _nextCoord(coord);
+      print("Deberia");
+    }
+  }
+
+ void _nextCoord(LatLng position,) {
+    _lastMapPosition = position;
+  }
 
   Widget button(Function function, IconData icon) {
     return FloatingActionButton(
@@ -75,6 +87,7 @@ class _Mapa extends State<Mapa> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('MetrApp'),              
@@ -87,7 +100,7 @@ class _Mapa extends State<Mapa> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 12.0,
           ),
           mapType: _currentMapType,
           markers: _markers,
@@ -122,8 +135,8 @@ class _Mapa extends State<Mapa> {
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     textColor: Colors.white,
                     color: Color.fromRGBO(196, 213, 77, 1),
-                    onPressed: _onAddMarkerButtonPressed,
-                  ),
+                    onPressed: _loadRoutes,
+                  ),                  
                   SizedBox(height: 16.0,),                  
                 ],
               ),

@@ -1,18 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:MetrApp/src/pages/home_map.dart';
 import 'package:flutter/material.dart';
 
-class MenuOptions extends StatelessWidget {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:MetrApp/src/providers/MapaR.dart';
+class RutasA extends StatelessWidget {
+
+  MapaR sendMapa;        
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Menu"), 
+        title: Text("Alimentadores"),
         backgroundColor: Color.fromRGBO(39, 99, 52, 1),
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: Firestore.instance.collection('menuAdmin').snapshots(),
+        stream: Firestore.instance.collection('Alimentadores').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(!snapshot.hasData){
             return Center(
@@ -39,12 +43,21 @@ class MenuOptions extends StatelessWidget {
       itemCount: docs.length,
       itemBuilder: (context, index){
         Map<String, dynamic> data = docs[index].data;
+        sendMapa = ModalRoute.of(context).settings.arguments; ///////
         return Column(
           children: <Widget>[
             ListTile(
-              title: Text(data['tipomenu']),
+              title: Text(data['nombre']),
               leading:  Icon(Icons.keyboard_arrow_right),
-              onTap: () => Navigator.pushNamed(context, data['path']),
+              onTap: (){
+                final route = MaterialPageRoute(
+                  builder: (context) {
+                    sendMapa = MapaR(data['nombre'], data['donFes'], data['horarioLV'], data['horarioS'], data['tiempo'], data['ruta']);
+                    return Mapa(data: sendMapa);
+                  }
+                );
+                Navigator.push(context, route);
+              },              
             ),
             Divider(thickness: 1.0,),
           ],
