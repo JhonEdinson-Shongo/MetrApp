@@ -18,7 +18,6 @@ class _PageNoticiasState extends State<PageNoticias>{
     noticiasRef.once().then((DataSnapshot snap){
       var keys = snap.value.keys;
       var data = snap.value;
-      
       noticiasList.clear();
 
       for(var individualKey in keys){
@@ -29,8 +28,6 @@ class _PageNoticiasState extends State<PageNoticias>{
           data[individualKey]['date'],
           data[individualKey]['time']
         );
-        print(data[individualKey]['image']);
-
         noticiasList.add(noticias);
       }
 

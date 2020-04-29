@@ -43,7 +43,7 @@ class RutasA extends StatelessWidget {
       itemCount: docs.length,
       itemBuilder: (context, index){
         Map<String, dynamic> data = docs[index].data;
-        sendMapa = ModalRoute.of(context).settings.arguments; ///////
+        //sendMapa = ModalRoute.of(context).settings.arguments;
         return Column(
           children: <Widget>[
             ListTile(

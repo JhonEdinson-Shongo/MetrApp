@@ -3,15 +3,18 @@ import 'package:MetrApp/src/pages/home_menuPage.dart';
 
 
 class HomePage extends StatefulWidget{
-
-  
+  HomePage({this.tipomenu});  
+  String tipomenu = "menu";
 
   @override
-  createState() => _HomePage();
+  createState() => _HomePage(tipomenu: tipomenu);
   }
 
   class _HomePage extends State<HomePage>{
-  
+  _HomePage({this.tipomenu});
+  String tipomenu;
+
+
   //Creamos una variable de tipo TextStyle para los textos del Home
   final TextStyle styleHomeTitulo = new TextStyle(fontSize: 25, height: 2);
   final TextStyle styleHomeParrafo = new TextStyle(fontSize: 15, height: 2);
@@ -116,7 +119,10 @@ class HomePage extends StatefulWidget{
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.toc, size: 50,),
-        backgroundColor: Color.fromRGBO(196, 213, 77, 1),   
+        backgroundColor: Color.fromRGBO(196, 213, 77, 1),  
+
+        onPressed: () => Navigator.pushNamed(context, 'menu', arguments: tipomenu),
+        /* 
         onPressed:(){
           final route = MaterialPageRoute(
             builder: (context) {
@@ -124,7 +130,7 @@ class HomePage extends StatefulWidget{
             }
           );
           Navigator.push(context, route);          
-        },
+        },*/
       ),
 
     );     

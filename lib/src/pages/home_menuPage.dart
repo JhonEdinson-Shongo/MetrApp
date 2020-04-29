@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MenuOptions extends StatelessWidget {
+  MenuOptions({this.tipomenu});
+  String tipomenu;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class MenuOptions extends StatelessWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: Firestore.instance.collection('menuAdmin').snapshots(),
+        stream: Firestore.instance.collection(tipomenu.toString()).snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(!snapshot.hasData){
             return Center(
@@ -44,7 +46,7 @@ class MenuOptions extends StatelessWidget {
             ListTile(
               title: Text(data['tipomenu']),
               leading:  Icon(Icons.keyboard_arrow_right),
-              onTap: () => Navigator.pushNamed(context, data['path']),
+              onTap: () => Navigator.pushNamed(context, data['path'], arguments: tipomenu),
             ),
             Divider(thickness: 1.0,),
           ],

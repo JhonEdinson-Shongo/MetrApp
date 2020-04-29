@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutterapp"
+        android:label="MetrApp"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyCldnpEEJ_KB-ldJQ1tt2-AzgjLsP8pGLc"/>
