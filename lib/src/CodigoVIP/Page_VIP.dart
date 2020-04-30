@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class PageVIP extends StatefulWidget {
   PageVIP({this.tipomenu});
-  String tipomenu;
+  String tipomenu = "menu";
 
   @override
-  _PageVIPState createState() => _PageVIPState();
+  _PageVIPState createState() => _PageVIPState(tp: tipomenu);
 }
 
 class _PageVIPState extends State<PageVIP> {
-  _PageVIPState({tp});
+  _PageVIPState({this.tp});
   String tp;
   String _codigo;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -21,21 +21,59 @@ class _PageVIPState extends State<PageVIP> {
     color: Colors.black,
   );
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Ingreso VIP"),
-        backgroundColor: Color.fromRGBO(39, 99, 52, 1),
-      ),
-      body: Stack(
-        children: <Widget>[
-          _crearFondo(context),
-          _codigoForm(context),
-        ],
-      )
-    );
+    print(tp);
+    if(tp == "menu"){
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Ingreso VIP"),
+          backgroundColor: Color.fromRGBO(39, 99, 52, 1),
+        ),
+        body: Stack(
+          children: <Widget>[
+            _crearFondo(context),
+            _codigoForm(context),
+          ],
+        )
+      );
+    }else{
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Ingreso VIP"),
+          backgroundColor: Color.fromRGBO(39, 99, 52, 1),
+        ),
+        body: Stack(          
+          children: <Widget>[
+            _crearFondo(context),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox( height: 30.0 ),
+                  RaisedButton(                                  
+                    child: Container(
+                      padding: EdgeInsets.symmetric( horizontal: 80.0, vertical: 15.0),                
+                      child: Text("cerrar sesion"),                
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)
+                    ),
+                    elevation: 0.0,
+                    color: Color.fromRGBO(39, 99, 52, 1),
+                    textColor: Colors.white,              
+                    onPressed: (){
+                      Navigator.pushNamed(context, "home", arguments: "menu");
+                    },
+                  ),
+                ],
+              ),
+            ),            
+          ],
+        ),
+      );
+    }
+    
   }
 
   Widget _crearFondo(BuildContext context) {

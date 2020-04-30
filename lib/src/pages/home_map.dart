@@ -17,6 +17,15 @@ class _Mapa extends State<Mapa> {
   _Mapa({this.doc});
   MapaR doc;
 
+  @override
+  void initState() { 
+    super.initState();
+    setState(() {
+      _loadRoutes();
+    });
+    
+  }
+
   Completer<GoogleMapController> _controller = Completer();
   static const LatLng _center = LatLng(7.059710, -73.090407);
   final Set<Marker> _markers = {};
@@ -43,9 +52,7 @@ class _Mapa extends State<Mapa> {
 
   //metodo para poner los puntos de las rutas...
   void _onAddMarkerButtonPressed(String time,LatLng coord, String nombre){
-    print("Entrooooooooo");
     setState(() {
-      print("SetState... aqui se añade?");
       _markers.add(Marker(
         markerId: MarkerId(_lastMapPosition.toString()),
         position: coord,
@@ -64,7 +71,6 @@ class _Mapa extends State<Mapa> {
       LatLng coord = LatLng(double.parse(coor[0]), double.parse(coor[1]));
       _onAddMarkerButtonPressed(doc.tiempo, coord, doc.nombre);
       _nextCoord(coord);
-      print("Deberia");
     }
   }
 
@@ -90,9 +96,14 @@ class _Mapa extends State<Mapa> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('MetrApp'),              
+        title: Row(
+          children: <Widget>[            
+            Text("MetrApp", textAlign: TextAlign.center,),
+            SizedBox(width: MediaQuery.of(context).size.width*0.3,),
+            Text(("Ruta: "+doc.nombre), textAlign: TextAlign.end,),
+          ],
+        ) ,
         backgroundColor: Color.fromRGBO(39, 99, 52, 1),
-        centerTitle: true,
       ),
       body: Stack(
         children: <Widget>[
@@ -112,32 +123,7 @@ class _Mapa extends State<Mapa> {
               alignment: Alignment.topRight,
               child: Column(
                 children: <Widget>[
-                  //button(_onMapTypeButtonPressed,Icons.map),
-                  RaisedButton(
-                    elevation: 10.0,
-                    child: Icon(Icons.map),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(60.0)),
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    textColor: Colors.white,
-                    color: Color.fromRGBO(196, 213, 77, 1),
-                    onPressed: _onMapTypeButtonPressed,
-                  ),
-                  SizedBox(height: 16.0,),
-                  //no se pueden poner mas de un boton flotante.
-                  RaisedButton(
-                    elevation: 10.0,
-                    child: Icon(Icons.add_location),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(60.0)),
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    textColor: Colors.white,
-                    color: Color.fromRGBO(196, 213, 77, 1),
-                    onPressed: _loadRoutes,
-                  ),                  
-                  SizedBox(height: 16.0,),                  
+                  button(_onMapTypeButtonPressed,Icons.map),               
                 ],
               ),
             ),

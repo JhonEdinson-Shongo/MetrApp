@@ -121,16 +121,7 @@ class HomePage extends StatefulWidget{
         child: Icon(Icons.toc, size: 50,),
         backgroundColor: Color.fromRGBO(196, 213, 77, 1),  
 
-        onPressed: () => Navigator.pushNamed(context, 'menu', arguments: tipomenu),
-        /* 
-        onPressed:(){
-          final route = MaterialPageRoute(
-            builder: (context) {
-              return MenuOptions();
-            }
-          );
-          Navigator.push(context, route);          
-        },*/
+        onPressed: () => Navigator.pushNamed(context, "menu", arguments: tipomenu),
       ),
 
     );     

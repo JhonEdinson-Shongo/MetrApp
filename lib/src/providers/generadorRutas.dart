@@ -41,12 +41,7 @@ class GeneradorRutas{
         return MaterialPageRoute(builder: (_) => PageNoticias());
       
       case 'rutas':
-        if(args is String){
-          return MaterialPageRoute(
-            builder: (_) => RutasA(),
-          );
-        }
-        return _errorRoute();
+      return MaterialPageRoute(builder: (_) => RutasA());
       
       case 'panelAdmin':
         return MaterialPageRoute(builder: (_) => Panel_Admin());
