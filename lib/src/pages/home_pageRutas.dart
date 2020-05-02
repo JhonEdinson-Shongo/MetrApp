@@ -48,7 +48,7 @@ class RutasA extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Text(data['nombre']),
-              leading:  Icon(Icons.keyboard_arrow_right),
+              leading:  Icon(Icons.directions_bus),
               onTap: (){
                 final route = MaterialPageRoute(
                   builder: (context) {

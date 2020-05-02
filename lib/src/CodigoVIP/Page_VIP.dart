@@ -177,6 +177,11 @@ class _PageVIPState extends State<PageVIP> {
                           hintText: 'Ej: codigoVIP',
                         ),
                         obscureText: true,
+                        onTap: (){
+                          setState(() {
+                            alerta = Icon(Icons.dialpad, color: Colors.black,);
+                          });                          
+                        },
                       ),
                     ),
                     Divider(),

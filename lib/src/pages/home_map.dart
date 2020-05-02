@@ -97,6 +97,8 @@ class _Mapa extends State<Mapa> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[            
             Text("MetrApp", textAlign: TextAlign.center,),
             SizedBox(width: MediaQuery.of(context).size.width*0.3,),
