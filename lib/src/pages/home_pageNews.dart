@@ -32,7 +32,7 @@ class _PageNoticiasState extends State<PageNoticias>{
       }
 
       setState((){
-        print("Length: $noticiasList.length");
+        noticiasList.length;
       });
 
     });

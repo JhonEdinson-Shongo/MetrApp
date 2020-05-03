@@ -127,7 +127,6 @@ class _Panel_AdminState extends State<Panel_Admin> {
       final StorageUploadTask uploadTask = postImg.child(timeKey.toString()+".jpg").putFile(img);
       var imgUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
       url = imgUrl.toString();
-      print("Image URL: " + url);
 
       //Guardar el Post a Firebase database: database realtime
       saveToDatabase(url);

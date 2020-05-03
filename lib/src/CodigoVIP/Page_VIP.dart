@@ -23,7 +23,6 @@ class _PageVIPState extends State<PageVIP> {
 
   @override
   Widget build(BuildContext context) {
-    print(tp);
     if(tp == "menu"){
       return Scaffold(
         appBar: AppBar(
@@ -228,7 +227,6 @@ class _PageVIPState extends State<PageVIP> {
           }
         });
       }catch(e){
-        print("ERROR ------------------******** $e");
       }      
     }
     
