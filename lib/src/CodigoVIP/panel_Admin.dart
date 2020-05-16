@@ -131,7 +131,7 @@ class _Panel_AdminState extends State<Panel_Admin> {
       //Guardar el Post a Firebase database: database realtime
       saveToDatabase(url);
       //Regresar al home
-      await Navigator.pushNamed(context,"home");
+      await Navigator.pushNamed(context,"home",arguments: "menuAdmin");
     }
   }
 
